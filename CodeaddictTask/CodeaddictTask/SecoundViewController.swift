@@ -9,9 +9,7 @@ import UIKit
 
 class SecoundViewController: UIViewController {
     let shareView = SecoundView()
-    let tableView = UITableView()
     let cellId = "CommitCell"
-    
     var commits: [Commit] = [Commit]()
     
     private func createCommitsArray() {
@@ -21,23 +19,11 @@ class SecoundViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(CommitCell.self, forCellReuseIdentifier: cellId)
-        tableView.dataSource = self
-        tableView.rowHeight = 100
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
-        tableView.isUserInteractionEnabled = false
-        
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 450).isActive = true // 383
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -118).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        shareView.tableView.register(CommitCell.self, forCellReuseIdentifier: cellId)
+        shareView.tableView.dataSource = self
     }
     
     private func setupView() {
-        view.backgroundColor = .white
-        
-        shareView.addSubview(tableView)
         view = shareView
     }
     
@@ -48,6 +34,7 @@ class SecoundViewController: UIViewController {
     override func loadView() {
         super.loadView()
         createCommitsArray()
+        
         
         setupView()
         setupTableView()

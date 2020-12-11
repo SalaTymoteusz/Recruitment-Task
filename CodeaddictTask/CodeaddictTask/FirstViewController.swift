@@ -20,7 +20,6 @@ class FirstViewController: UIViewController {
     var owners: [Owner] = [Owner]()
     let shareView = FirstView()
     let cellId = "cellId"
-    let tableView = UITableView()
     
     private func createOwnerArray() {
         owners.append(Owner(repositoryName: "Tymek", ownerImage: #imageLiteral(resourceName: "avatar"), repositoryStars: 5))
@@ -36,23 +35,13 @@ class FirstViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(OwnerCell.self, forCellReuseIdentifier: cellId)
-        tableView.dataSource = self
-//        tableView.delegate = self
-        tableView.rowHeight = 100
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: shareView.headerTitleLabel.bottomAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: shareView.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: shareView.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: shareView.bottomAnchor).isActive = true
-        tableView.separatorColor = .white
+        shareView.tableView.register(OwnerCell.self, forCellReuseIdentifier: cellId)
+        shareView.tableView.dataSource = self
     }
 
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(shareView)
-        view.addSubview(tableView)
         
         setupSafeArea()
         setupTableView()

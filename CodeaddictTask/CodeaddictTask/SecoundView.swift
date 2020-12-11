@@ -150,6 +150,15 @@ class SecoundView: UIView {
         return view
     }()
     
+    let tableView: UITableView = {
+        let tbl = UITableView()
+        tbl.rowHeight = 100
+        tbl.translatesAutoresizingMaskIntoConstraints = false
+        tbl.backgroundColor = .white
+        tbl.isUserInteractionEnabled = false
+        return tbl
+    }()
+    
     //Method for setup stackViews
     private func setupStackViews() {
         
@@ -162,7 +171,7 @@ class SecoundView: UIView {
         stackViewVertical.addArrangedSubview(repoAuthorNameLabel)
         stackViewVertical.addArrangedSubview(stackViewHorizontal)
     }
-    
+ 
     private func setupSubViews() {
         setupStackViews()
         
@@ -176,7 +185,7 @@ class SecoundView: UIView {
         
         titleView.addSubview(repoTitleLabel)
         titleView.addSubview(viewOnlineButton)
-        
+        contentView.addSubview(tableView)
         contentView.addSubview(commitsHistoryLabel)
     }
 
@@ -231,6 +240,11 @@ class SecoundView: UIView {
             shareRepoButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             shareRepoButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             shareRepoButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -44),
+            
+            tableView.topAnchor.constraint(equalTo: commitsHistoryLabel.bottomAnchor, constant: 10), // 383
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -95),
+            tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
         ])
     }
 

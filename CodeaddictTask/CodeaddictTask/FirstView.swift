@@ -45,6 +45,14 @@ class FirstView: UIView {
         return lbl
     }()
     
+    let tableView: UITableView = {
+        let tbl = UITableView()
+        tbl.rowHeight = 100
+        tbl.separatorColor = .white
+        tbl.translatesAutoresizingMaskIntoConstraints = false
+        return tbl
+    }()
+    
     //Method for setting constraints
     private func setupAutoLayout() {
         searchLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 34).isActive = true
@@ -61,6 +69,11 @@ class FirstView: UIView {
         headerTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         headerTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         headerTitleLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        
+        tableView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     //Method for adding views
@@ -68,12 +81,12 @@ class FirstView: UIView {
         self.addSubview(searchLabel)
         self.addSubview(searchBar)
         self.addSubview(headerTitleLabel)
+        self.addSubview(tableView)
     }
 
     //Method for setting view
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .white
         addSubViews()
         setupAutoLayout()
     }
