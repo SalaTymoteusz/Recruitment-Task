@@ -17,6 +17,8 @@
 		A98AF9F42583F4A900816AED /* CodeaddictTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9F32583F4A900816AED /* CodeaddictTaskUITests.swift */; };
 		A98AFA082583F76F00816AED /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA072583F76F00816AED /* FirstView.swift */; };
 		A98AFA0D2583FDF800816AED /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA0C2583FDF800816AED /* OwnerCell.swift */; };
+		A98AFA1A2584140700816AED /* SecoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA192584140700816AED /* SecoundViewController.swift */; };
+		A98AFA1F2584142C00816AED /* SecoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA1E2584142C00816AED /* SecoundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		A98AF9F52583F4A900816AED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A98AFA072583F76F00816AED /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		A98AFA0C2583FDF800816AED /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
+		A98AFA192584140700816AED /* SecoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecoundViewController.swift; sourceTree = "<group>"; };
+		A98AFA1E2584142C00816AED /* SecoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecoundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				A98AF9D52583F4A700816AED /* FirstViewController.swift */,
 				A98AFA0C2583FDF800816AED /* OwnerCell.swift */,
 				A98AFA072583F76F00816AED /* FirstView.swift */,
+				A98AFA192584140700816AED /* SecoundViewController.swift */,
+				A98AFA1E2584142C00816AED /* SecoundView.swift */,
 				A98AF9D72583F4A700816AED /* Main.storyboard */,
 				A98AF9DA2583F4A900816AED /* Assets.xcassets */,
 				A98AF9DC2583F4A900816AED /* LaunchScreen.storyboard */,
@@ -264,7 +270,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98AFA1A2584140700816AED /* SecoundViewController.swift in Sources */,
 				A98AF9D62583F4A700816AED /* FirstViewController.swift in Sources */,
+				A98AFA1F2584142C00816AED /* SecoundView.swift in Sources */,
 				A98AFA082583F76F00816AED /* FirstView.swift in Sources */,
 				A98AFA0D2583FDF800816AED /* OwnerCell.swift in Sources */,
 				A98AF9D22583F4A700816AED /* AppDelegate.swift in Sources */,

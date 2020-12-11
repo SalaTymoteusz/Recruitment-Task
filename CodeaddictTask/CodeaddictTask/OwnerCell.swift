@@ -20,7 +20,7 @@ class OwnerCell: UITableViewCell {
     //Rounded cell background
     private let grayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemGroupedBackground
         view.layer.cornerRadius = 13
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
