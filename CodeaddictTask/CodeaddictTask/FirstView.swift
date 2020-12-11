@@ -43,4 +43,29 @@ class FirstView: UIView {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
+    
+    //Method for adding views
+    private func addSubViews() {
+        self.addSubview(searchLabel)
+        self.addSubview(searchBar)
+        self.addSubview(headerTitleLabel)
+    }
+
+    //Method for setting view
+    private func setupView() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .white
+        addSubViews()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+
 }
