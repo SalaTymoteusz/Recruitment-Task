@@ -19,6 +19,8 @@ class FirstViewController: UIViewController {
     
     var owners: [Owner] = [Owner]()
     let shareView = FirstView()
+    let cellId = "cellId"
+    let tableView = UITableView()
     
     private func createOwnerArray() {
         owners.append(Owner(repositoryName: "Tymek", ownerImage: #imageLiteral(resourceName: "avatar"), repositoryStars: 5))
@@ -33,16 +35,50 @@ class FirstViewController: UIViewController {
         owners.append(Owner(repositoryName: "Klaudia", ownerImage: #imageLiteral(resourceName: "avatar"), repositoryStars: 0))
     }
     
+    private func setupTableView() {
+        tableView.register(OwnerCell.self, forCellReuseIdentifier: cellId)
+        tableView.dataSource = self
+//        tableView.delegate = self
+        tableView.rowHeight = 100
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: shareView.headerTitleLabel.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: shareView.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: shareView.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: shareView.bottomAnchor).isActive = true
+        tableView.separatorColor = .white
+    }
+
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(shareView)
+        view.addSubview(tableView)
+        
         setupSafeArea()
+        setupTableView()
     }
     
     override func loadView() {
         super.loadView()
         createOwnerArray()
         setupView()
+    }
+}
+
+// MARK: TABLEVIEW CODE
+extension FirstViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! OwnerCell
+        let currentLastItem = owners[indexPath.row]
+        cell.backgroundColor = .white
+        cell.owner = currentLastItem
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return owners.count
     }
 }
 
@@ -69,4 +105,3 @@ extension FirstViewController {
         }
     }
 }
-
