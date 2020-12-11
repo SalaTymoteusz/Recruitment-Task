@@ -19,6 +19,7 @@
 		A98AFA0D2583FDF800816AED /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA0C2583FDF800816AED /* OwnerCell.swift */; };
 		A98AFA1A2584140700816AED /* SecoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA192584140700816AED /* SecoundViewController.swift */; };
 		A98AFA1F2584142C00816AED /* SecoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA1E2584142C00816AED /* SecoundView.swift */; };
+		A98AFA2C258421D000816AED /* CommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA2B258421D000816AED /* CommitCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		A98AFA0C2583FDF800816AED /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
 		A98AFA192584140700816AED /* SecoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecoundViewController.swift; sourceTree = "<group>"; };
 		A98AFA1E2584142C00816AED /* SecoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecoundView.swift; sourceTree = "<group>"; };
+		A98AFA2B258421D000816AED /* CommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				A98AFA0C2583FDF800816AED /* OwnerCell.swift */,
 				A98AFA072583F76F00816AED /* FirstView.swift */,
 				A98AFA192584140700816AED /* SecoundViewController.swift */,
+				A98AFA2B258421D000816AED /* CommitCell.swift */,
 				A98AFA1E2584142C00816AED /* SecoundView.swift */,
 				A98AF9D72583F4A700816AED /* Main.storyboard */,
 				A98AF9DA2583F4A900816AED /* Assets.xcassets */,
@@ -274,6 +277,7 @@
 				A98AF9D62583F4A700816AED /* FirstViewController.swift in Sources */,
 				A98AFA1F2584142C00816AED /* SecoundView.swift in Sources */,
 				A98AFA082583F76F00816AED /* FirstView.swift in Sources */,
+				A98AFA2C258421D000816AED /* CommitCell.swift in Sources */,
 				A98AFA0D2583FDF800816AED /* OwnerCell.swift in Sources */,
 				A98AF9D22583F4A700816AED /* AppDelegate.swift in Sources */,
 				A98AF9D42583F4A700816AED /* SceneDelegate.swift in Sources */,

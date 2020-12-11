@@ -8,12 +8,7 @@
 import UIKit
 
 class SecoundView: UIView {
-    //WHAT I WILL NEEDED
-    // 6x Label
-    // 2x Button
-    // 3x StackView
-    // 3x ImageView
-    
+
     private let repoByLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .lightGray
@@ -168,11 +163,84 @@ class SecoundView: UIView {
         stackViewVertical.addArrangedSubview(stackViewHorizontal)
     }
     
+    private func setupSubViews() {
+        setupStackViews()
+        
+        self.addSubview(contentView)
+        
+        //Adding views
+        contentView.addSubview(backgroundImage)
+        contentView.addSubview(stackViewVertical)
+        contentView.addSubview(titleView)
+        contentView.addSubview(shareRepoButton)
+        
+        titleView.addSubview(repoTitleLabel)
+        titleView.addSubview(viewOnlineButton)
+        
+        contentView.addSubview(commitsHistoryLabel)
+    }
+
+    private func setupView() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
+        setupSubViews()
+        setupAutoLayout(stackView: stackViewVertical)
+    }
+    
+    private func setupAutoLayout(stackView: UIStackView) {
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        let height = bounds.size.height
+        
+        NSLayoutConstraint.activate([
+            
+            contentView.widthAnchor.constraint(equalToConstant: width),
+            contentView.heightAnchor.constraint(equalToConstant: height),
+        
+            //Constraints for
+            backgroundImage.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backgroundImage.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            backgroundImage.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1/3),
+            
+            stackViewVertical.bottomAnchor.constraint(equalTo: backgroundImage.bottomAnchor, constant: -22),
+            stackViewVertical.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+
+            
+            starImage.heightAnchor.constraint(equalToConstant: 13),
+            starImage.widthAnchor.constraint(equalToConstant: 13),
+            starImage.centerYAnchor.constraint(equalTo: stackViewHorizontal.centerYAnchor),
+//            starImage.leftAnchor.constraint(equalTo: stackViewHorizontal.leftAnchor),
+
+            titleView.heightAnchor.constraint(equalToConstant: 50),
+            titleView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            titleView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            titleView.topAnchor.constraint(equalTo: backgroundImage.bottomAnchor, constant: 20),
+
+            repoTitleLabel.leftAnchor.constraint(equalTo: titleView.leftAnchor),
+            repoTitleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+
+            viewOnlineButton.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            viewOnlineButton.rightAnchor.constraint(equalTo: titleView.rightAnchor),
+
+            commitsHistoryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            commitsHistoryLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 35),
+            commitsHistoryLabel.heightAnchor.constraint(equalToConstant: 28),
+            
+            shareRepoButton.heightAnchor.constraint(equalToConstant: 50),
+            shareRepoButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            shareRepoButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            shareRepoButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -44),
+        ])
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupView()
     }
 }
