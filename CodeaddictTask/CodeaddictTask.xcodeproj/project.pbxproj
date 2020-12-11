@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		A98AF9D22583F4A700816AED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9D12583F4A700816AED /* AppDelegate.swift */; };
 		A98AF9D42583F4A700816AED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9D32583F4A700816AED /* SceneDelegate.swift */; };
-		A98AF9D62583F4A700816AED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9D52583F4A700816AED /* ViewController.swift */; };
+		A98AF9D62583F4A700816AED /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9D52583F4A700816AED /* FirstViewController.swift */; };
 		A98AF9D92583F4A700816AED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98AF9D72583F4A700816AED /* Main.storyboard */; };
 		A98AF9DB2583F4A900816AED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98AF9DA2583F4A900816AED /* Assets.xcassets */; };
 		A98AF9DE2583F4A900816AED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98AF9DC2583F4A900816AED /* LaunchScreen.storyboard */; };
 		A98AF9E92583F4A900816AED /* CodeaddictTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9E82583F4A900816AED /* CodeaddictTaskTests.swift */; };
 		A98AF9F42583F4A900816AED /* CodeaddictTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AF9F32583F4A900816AED /* CodeaddictTaskUITests.swift */; };
+		A98AFA082583F76F00816AED /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA072583F76F00816AED /* FirstView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 		A98AF9CE2583F4A700816AED /* CodeaddictTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeaddictTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98AF9D12583F4A700816AED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A98AF9D32583F4A700816AED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A98AF9D52583F4A700816AED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A98AF9D52583F4A700816AED /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		A98AF9D82583F4A700816AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A98AF9DA2583F4A900816AED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98AF9DD2583F4A900816AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		A98AF9EF2583F4A900816AED /* CodeaddictTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeaddictTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98AF9F32583F4A900816AED /* CodeaddictTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeaddictTaskUITests.swift; sourceTree = "<group>"; };
 		A98AF9F52583F4A900816AED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A98AFA072583F76F00816AED /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +103,8 @@
 			children = (
 				A98AF9D12583F4A700816AED /* AppDelegate.swift */,
 				A98AF9D32583F4A700816AED /* SceneDelegate.swift */,
-				A98AF9D52583F4A700816AED /* ViewController.swift */,
+				A98AF9D52583F4A700816AED /* FirstViewController.swift */,
+				A98AFA072583F76F00816AED /* FirstView.swift */,
 				A98AF9D72583F4A700816AED /* Main.storyboard */,
 				A98AF9DA2583F4A900816AED /* Assets.xcassets */,
 				A98AF9DC2583F4A900816AED /* LaunchScreen.storyboard */,
@@ -258,7 +261,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A98AF9D62583F4A700816AED /* ViewController.swift in Sources */,
+				A98AF9D62583F4A700816AED /* FirstViewController.swift in Sources */,
+				A98AFA082583F76F00816AED /* FirstView.swift in Sources */,
 				A98AF9D22583F4A700816AED /* AppDelegate.swift in Sources */,
 				A98AF9D42583F4A700816AED /* SceneDelegate.swift in Sources */,
 			);
