@@ -28,6 +28,7 @@ class FirstView: UIView {
         shb.placeholder = "Search"
         shb.isTranslucent = false
         shb.backgroundImage = UIImage()
+        shb.backgroundColor = .lightGray
         shb.translatesAutoresizingMaskIntoConstraints = false
         return shb
     }()
@@ -37,12 +38,30 @@ class FirstView: UIView {
         let lbl: UILabel = UILabel()
         lbl.textAlignment = .left
         lbl.text = "Repositories"
-        lbl.font = UIFont.boldSystemFont(ofSize: 20)
+        lbl.font = UIFont.boldSystemFont(ofSize: 22)
         lbl.numberOfLines = 0
         lbl.sizeToFit()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
+    
+    //Method for setting constraints
+    private func setupAutoLayout() {
+        searchLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 34).isActive = true
+        searchLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        searchLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        searchLabel.heightAnchor.constraint(equalToConstant: 41).isActive = true
+        
+        searchBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -10).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        searchBar.topAnchor.constraint(equalTo: searchLabel.bottomAnchor, constant: 14).isActive = true
+        
+        headerTitleLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30).isActive = true
+        headerTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        headerTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        headerTitleLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
     
     //Method for adding views
     private func addSubViews() {
@@ -56,6 +75,7 @@ class FirstView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .white
         addSubViews()
+        setupAutoLayout()
     }
     
     override init(frame: CGRect) {
