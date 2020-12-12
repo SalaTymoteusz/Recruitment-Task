@@ -7,13 +7,6 @@
 
 import UIKit
 
-//TEMPORARY DATA STRUCTURE
-struct Owner {
-    var repositoryName: String
-    var ownerImage: UIImage
-    var repositoryStars: Int
-}
-
 class FirstViewController: UIViewController {
     
     weak var coordinator: MainCoordinator?

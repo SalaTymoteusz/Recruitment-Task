@@ -8,7 +8,7 @@
 import UIKit
 
 class FirstView: UIView {
-        
+
     let searchLabel: UILabel = {
         let lbl = UILabel()
         lbl.sizeToFit()

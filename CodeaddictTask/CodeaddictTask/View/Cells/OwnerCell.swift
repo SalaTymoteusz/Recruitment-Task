@@ -135,11 +135,13 @@ class OwnerCell: UITableViewCell {
             
             //Constraints for number of stars
             repositoryStarsLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 4),
-            
+                        
             //Constraints for main stackView, it contains name of repository
             //and stackView for star image and number of stars
             stackView.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            stackView.leftAnchor.constraint(equalTo: ownerImage.rightAnchor, constant: 16)
+            stackView.leftAnchor.constraint(equalTo: ownerImage.rightAnchor, constant: 16),
+            
+                
         ])
     }
     

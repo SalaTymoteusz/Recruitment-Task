@@ -7,13 +7,6 @@
 
 import UIKit
 
-//TEMPORARY DATA STRUCTURE
-struct Commit {
-    var authorName: String
-    var authorEmail: String
-    var message: String
-}
-
 class SecoundViewController: UIViewController {
     
     weak var coordinator: SecoundViewCoordinator?

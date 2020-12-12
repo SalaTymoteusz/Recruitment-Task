@@ -23,6 +23,10 @@
 		A98AFA3125851FDD00816AED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA3025851FDD00816AED /* Coordinator.swift */; };
 		A98AFA36258523AF00816AED /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA35258523AF00816AED /* MainCoordinator.swift */; };
 		A98AFA3B2585347B00816AED /* SecoundViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA3A2585347B00816AED /* SecoundViewCoordinator.swift */; };
+		A98AFA512585470900816AED /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA502585470900816AED /* ViewModelProtocol.swift */; };
+		A98AFA56258547C500816AED /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA55258547C500816AED /* ViewModel.swift */; };
+		A98AFA5B2585485100816AED /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA5A2585485100816AED /* Owner.swift */; };
+		A98AFA60258548A900816AED /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA5F258548A900816AED /* Commit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		A98AFA3025851FDD00816AED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A98AFA35258523AF00816AED /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		A98AFA3A2585347B00816AED /* SecoundViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecoundViewCoordinator.swift; sourceTree = "<group>"; };
+		A98AFA502585470900816AED /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		A98AFA55258547C500816AED /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		A98AFA5A2585485100816AED /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		A98AFA5F258548A900816AED /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,14 +123,13 @@
 		A98AF9D02583F4A700816AED /* CodeaddictTask */ = {
 			isa = PBXGroup;
 			children = (
-				A98AFA43258537F100816AED /* Views */,
+				A98AFA43258537F100816AED /* View */,
+				A98AFA482585410000816AED /* ViewModel */,
+				A98AFA492585410C00816AED /* Model */,
+				A98AFA4A2585411400816AED /* Network */,
 				A98AFA42258537C400816AED /* Coordinators */,
-				A98AF9D12583F4A700816AED /* AppDelegate.swift */,
-				A98AF9D32583F4A700816AED /* SceneDelegate.swift */,
-				A98AF9D72583F4A700816AED /* Main.storyboard */,
-				A98AF9DA2583F4A900816AED /* Assets.xcassets */,
-				A98AF9DC2583F4A900816AED /* LaunchScreen.storyboard */,
-				A98AF9DF2583F4A900816AED /* Info.plist */,
+				A98AFA4C2585413900816AED /* Resources */,
+				A98AFA4B2585412200816AED /* Storyboards */,
 			);
 			path = CodeaddictTask;
 			sourceTree = "<group>";
@@ -155,7 +162,7 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		A98AFA43258537F100816AED /* Views */ = {
+		A98AFA43258537F100816AED /* View */ = {
 			isa = PBXGroup;
 			children = (
 				A98AF9D52583F4A700816AED /* FirstViewController.swift */,
@@ -164,7 +171,7 @@
 				A98AFA1E2584142C00816AED /* SecoundView.swift */,
 				A98AFA442585382100816AED /* Cells */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		A98AFA442585382100816AED /* Cells */ = {
@@ -174,6 +181,51 @@
 				A98AFA2B258421D000816AED /* CommitCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		A98AFA482585410000816AED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A98AFA502585470900816AED /* ViewModelProtocol.swift */,
+				A98AFA55258547C500816AED /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A98AFA492585410C00816AED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A98AFA5A2585485100816AED /* Owner.swift */,
+				A98AFA5F258548A900816AED /* Commit.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A98AFA4A2585411400816AED /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A98AFA4B2585412200816AED /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A98AF9D72583F4A700816AED /* Main.storyboard */,
+				A98AF9DC2583F4A900816AED /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		A98AFA4C2585413900816AED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A98AF9DF2583F4A900816AED /* Info.plist */,
+				A98AF9DA2583F4A900816AED /* Assets.xcassets */,
+				A98AF9D32583F4A700816AED /* SceneDelegate.swift */,
+				A98AF9D12583F4A700816AED /* AppDelegate.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,14 +358,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98AFA60258548A900816AED /* Commit.swift in Sources */,
 				A98AFA1A2584140700816AED /* SecoundViewController.swift in Sources */,
 				A98AF9D62583F4A700816AED /* FirstViewController.swift in Sources */,
 				A98AFA1F2584142C00816AED /* SecoundView.swift in Sources */,
 				A98AFA3B2585347B00816AED /* SecoundViewCoordinator.swift in Sources */,
 				A98AFA36258523AF00816AED /* MainCoordinator.swift in Sources */,
 				A98AFA082583F76F00816AED /* FirstView.swift in Sources */,
+				A98AFA56258547C500816AED /* ViewModel.swift in Sources */,
 				A98AFA2C258421D000816AED /* CommitCell.swift in Sources */,
 				A98AFA0D2583FDF800816AED /* OwnerCell.swift in Sources */,
+				A98AFA5B2585485100816AED /* Owner.swift in Sources */,
+				A98AFA512585470900816AED /* ViewModelProtocol.swift in Sources */,
 				A98AF9D22583F4A700816AED /* AppDelegate.swift in Sources */,
 				A98AF9D42583F4A700816AED /* SceneDelegate.swift in Sources */,
 				A98AFA3125851FDD00816AED /* Coordinator.swift in Sources */,
@@ -494,7 +550,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWAUR4MVN4;
-				INFOPLIST_FILE = CodeaddictTask/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CodeaddictTask/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -513,7 +569,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWAUR4MVN4;
-				INFOPLIST_FILE = CodeaddictTask/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CodeaddictTask/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
