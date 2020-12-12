@@ -22,7 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the root view controller as needed
         let viewController = FirstViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.isNavigationBarHidden = true
+//        navigationController.isNavigationBarHidden = true
+        
+        
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.isTranslucent = true
+        navigationController.view.backgroundColor = UIColor.clear
+        navigationController.navigationBar.tintColor = .white
+        
+        
         // Create the window. Be sure to use this initializer and not the frame one.
         let win = UIWindow(windowScene: winScene)
         win.rootViewController = navigationController
