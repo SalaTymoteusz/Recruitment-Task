@@ -37,6 +37,7 @@ class FirstViewController: UIViewController {
     private func setupTableView() {
         shareView.tableView.register(OwnerCell.self, forCellReuseIdentifier: cellId)
         shareView.tableView.dataSource = self
+        shareView.tableView.delegate = self
     }
 
     private func setupView() {
@@ -45,13 +46,14 @@ class FirstViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+    
         createOwnerArray()
         setupView()
         setupTableView()
     }
 }
 
-// MARK: TABLEVIEW CODE
+// MARK: TABLEVIEW DATASOURCE CODE
 extension FirstViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,4 +75,18 @@ extension FirstViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return owners.count
     }
+}
+
+// MARK: TABLEVIEW DELEGATE
+extension FirstViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("cell tapped")
+        
+        let newViewController = SecoundViewController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+
+    
 }

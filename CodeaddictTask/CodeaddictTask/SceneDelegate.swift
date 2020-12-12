@@ -18,8 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let winScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: winScene)
-        window?.rootViewController = FirstViewController()
-        window?.makeKeyAndVisible()
+        
+        // Create the root view controller as needed
+        let viewController = FirstViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.isNavigationBarHidden = true
+        // Create the window. Be sure to use this initializer and not the frame one.
+        let win = UIWindow(windowScene: winScene)
+        win.rootViewController = navigationController
+        win.backgroundColor = .white
+        win.makeKeyAndVisible()
+        window = win
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

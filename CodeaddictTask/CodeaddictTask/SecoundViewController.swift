@@ -38,6 +38,10 @@ class SecoundViewController: UIViewController {
           return .lightContent
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override func loadView() {
         super.loadView()
         createCommitsArray()

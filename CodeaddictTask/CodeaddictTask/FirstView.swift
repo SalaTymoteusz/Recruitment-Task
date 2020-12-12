@@ -63,7 +63,13 @@ class FirstView: UIView {
     
     //Method for setting constraints
     private func setupAutoLayout() {
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        let height = bounds.size.height
+        
         NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalToConstant: width - 40),
+            contentView.heightAnchor.constraint(equalToConstant: height - 89),
             contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 89),
