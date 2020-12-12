@@ -1,0 +1,6 @@
+framework module Pods_CodeaddictTask_CodeaddictTaskUITests {
+  umbrella header "Pods-CodeaddictTask-CodeaddictTaskUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
