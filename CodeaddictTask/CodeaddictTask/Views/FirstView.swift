@@ -8,8 +8,7 @@
 import UIKit
 
 class FirstView: UIView {
-    
-    //Label for Search caption
+        
     let searchLabel: UILabel = {
         let lbl = UILabel()
         lbl.sizeToFit()
@@ -21,7 +20,6 @@ class FirstView: UIView {
         return lbl
     }()
     
-    //Creating search bar
     let searchBar: UISearchBar = {
         let shb = UISearchBar()
         shb.sizeToFit()
@@ -44,7 +42,7 @@ class FirstView: UIView {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
-    
+
     let tableView: UITableView = {
         let tbl = UITableView()
         tbl.rowHeight = 100
@@ -52,14 +50,13 @@ class FirstView: UIView {
         tbl.translatesAutoresizingMaskIntoConstraints = false
         return tbl
     }()
-    
+
     let contentView: UIView = {
        let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     //Method for setting constraints
     private func setupAutoLayout() {
@@ -110,7 +107,6 @@ class FirstView: UIView {
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .white
-        
         addSubViews()
         setupAutoLayout()
     }

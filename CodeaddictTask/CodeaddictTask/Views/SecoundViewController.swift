@@ -15,9 +15,11 @@ struct Commit {
 }
 
 class SecoundViewController: UIViewController {
+    
+    weak var coordinator: SecoundViewCoordinator?
+    var commits: [Commit] = [Commit]()
     let shareView = SecoundView()
     let cellId = "CommitCell"
-    var commits: [Commit] = [Commit]()
     
     private func createCommitsArray() {
         commits.append(Commit(authorName: "Commit author name", authorEmail: "email@authorname.com", message: "This is a shor commit messsage."))
@@ -38,10 +40,11 @@ class SecoundViewController: UIViewController {
           return .lightContent
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinishBuying()
     }
-    
+        
     override func loadView() {
         super.loadView()
         createCommitsArray()

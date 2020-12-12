@@ -16,6 +16,7 @@ struct Owner {
 
 class FirstViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
     var owners: [Owner] = [Owner]()
     let shareView = FirstView()
     let cellId = "cellId"
@@ -84,8 +85,8 @@ extension FirstViewController: UITableViewDelegate {
         
         print("cell tapped")
         
-        let newViewController = SecoundViewController()
-        self.navigationController?.pushViewController(newViewController, animated: true)
+        coordinator?.cellTapped()
+        
     }
 
     

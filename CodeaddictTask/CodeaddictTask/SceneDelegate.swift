@@ -10,8 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    var coordinator: MainCoordinator?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -19,26 +19,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let winScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: winScene)
         
-        // Create the root view controller as needed
-        let viewController = FirstViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-//        navigationController.isNavigationBarHidden = true
+        let navController = UINavigationController()
+        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.isTranslucent = true
+        navController.view.backgroundColor = UIColor.clear
+        navController.navigationBar.tintColor = .white
         
+        coordinator = MainCoordinator(navigationController: navController)
+        coordinator?.start()
         
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.view.backgroundColor = UIColor.clear
-        navigationController.navigationBar.tintColor = .white
-        
-        
-        // Create the window. Be sure to use this initializer and not the frame one.
-        let win = UIWindow(windowScene: winScene)
-        win.rootViewController = navigationController
-        win.backgroundColor = .white
-        win.makeKeyAndVisible()
-        window = win
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
     }
+
+
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+//        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+//        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+//        guard let winScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: winScene)
+//
+//        // Create the root view controller as needed
+//        let viewController = FirstViewController()
+//        let navigationController = UINavigationController(rootViewController: viewController)
+//
+//        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController.navigationBar.shadowImage = UIImage()
+//        navigationController.navigationBar.isTranslucent = true
+//        navigationController.view.backgroundColor = UIColor.clear
+//        navigationController.navigationBar.tintColor = .white
+//
+//        // Create the window. Be sure to use this initializer and not the frame one.
+//        let win = UIWindow(windowScene: winScene)
+//        win.rootViewController = navigationController
+//        win.backgroundColor = .white
+//        win.makeKeyAndVisible()
+//        window = win
+//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
