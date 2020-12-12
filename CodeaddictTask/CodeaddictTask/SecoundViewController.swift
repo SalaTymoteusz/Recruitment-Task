@@ -7,6 +7,13 @@
 
 import UIKit
 
+//TEMPORARY DATA STRUCTURE
+struct Commit {
+    var authorName: String
+    var authorEmail: String
+    var message: String
+}
+
 class SecoundViewController: UIViewController {
     let shareView = SecoundView()
     let cellId = "CommitCell"
@@ -35,7 +42,6 @@ class SecoundViewController: UIViewController {
         super.loadView()
         createCommitsArray()
         
-        
         setupView()
         setupTableView()
     }
@@ -45,10 +51,15 @@ extension SecoundViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CommitCell
-        let currentLastItem = commits[indexPath.row]
+        
+        //style for cell
         cell.backgroundColor = .white
-        cell.commit = currentLastItem
         cell.selectionStyle = .none
+        
+        //data for cell
+        cell.authorNameLabel.text = commits[indexPath.row].authorName
+        cell.authorEmailLabel.text = commits[indexPath.row].authorEmail
+        cell.messageLabel.text = commits[indexPath.row].message
         return cell
     }
 

@@ -53,40 +53,58 @@ class FirstView: UIView {
         return tbl
     }()
     
+    let contentView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
     //Method for setting constraints
     private func setupAutoLayout() {
-        searchLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 34).isActive = true
-        searchLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        searchLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        searchLabel.heightAnchor.constraint(equalToConstant: 41).isActive = true
-        
-        searchBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -10).isActive = true
-        searchBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        searchBar.topAnchor.constraint(equalTo: searchLabel.bottomAnchor, constant: 14).isActive = true
-        
-        headerTitleLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30).isActive = true
-        headerTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        headerTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        headerTitleLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
-        
-        tableView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 89),
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            searchLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            searchLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            searchLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            searchLabel.heightAnchor.constraint(equalToConstant: 41),
+
+            searchBar.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: -10),
+            searchBar.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 10),
+            searchBar.heightAnchor.constraint(equalToConstant: 36),
+            searchBar.topAnchor.constraint(equalTo: searchLabel.bottomAnchor, constant: 14),
+
+            headerTitleLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30),
+            headerTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            headerTitleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            headerTitleLabel.heightAnchor.constraint(equalToConstant: 28),
+
+            tableView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
     //Method for adding views
     private func addSubViews() {
-        self.addSubview(searchLabel)
-        self.addSubview(searchBar)
-        self.addSubview(headerTitleLabel)
-        self.addSubview(tableView)
+        self.addSubview(contentView)
+        contentView.addSubview(searchLabel)
+        contentView.addSubview(searchBar)
+        contentView.addSubview(headerTitleLabel)
+        contentView.addSubview(tableView)
     }
 
     //Method for setting view
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .white
+        
         addSubViews()
         setupAutoLayout()
     }

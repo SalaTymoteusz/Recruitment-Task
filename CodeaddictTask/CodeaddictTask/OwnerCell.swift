@@ -8,17 +8,9 @@
 import UIKit
 
 class OwnerCell: UITableViewCell {
-
-    var owner: Owner? {
-        didSet {
-            repositoryNameLabel.text = owner?.repositoryName
-            ownerImage.image = owner?.ownerImage
-            repositoryStarsLabel.text = String(owner?.repositoryStars ?? 0)
-        }
-    }
     
     //Rounded cell background
-    private let grayView: UIView = {
+    let grayView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGroupedBackground
         view.layer.cornerRadius = 13
@@ -27,7 +19,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Number of repository stars
-    private let repositoryStarsLabel: UILabel = {
+    let repositoryStarsLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .lightGray
         lbl.font = UIFont.systemFont(ofSize: 17)
@@ -36,7 +28,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Repository name
-    private let repositoryNameLabel: UILabel = {
+    let repositoryNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +36,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Repository owner avatar
-    private let ownerImage: UIImageView = {
+    let ownerImage: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "avatar"))
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 10
@@ -65,7 +57,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Image of arrow
-    private let arrowImage: UIImageView = {
+    let arrowImage: UIImageView = {
         let arrow = UIImage(systemName: "chevron.forward")
         let imageView = UIImageView(image: arrow)
         imageView.tintColor = .gray
@@ -76,7 +68,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Creating stackView for star image and number of stars label
-    private let stackViewHorizontal: UIStackView = {
+    let stackViewHorizontal: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
         svh.distribution = .equalSpacing
         svh.axis = .horizontal
@@ -86,7 +78,7 @@ class OwnerCell: UITableViewCell {
     }()
     
     //Creating stackView for repository name label and stackViewFirst
-    private let stackViewVertical: UIStackView = {
+    let stackViewVertical: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
         svh.distribution = .equalSpacing
         svh.axis = .vertical
@@ -118,12 +110,6 @@ class OwnerCell: UITableViewCell {
     //Method for setting appropriate constraints
     private func setupAutoLayout(stackView: UIStackView) {
         NSLayoutConstraint.activate([
-            
-            //Constraints for cell
-            self.topAnchor.constraint(equalTo: self.topAnchor),
-            self.leftAnchor.constraint(equalTo: self.leftAnchor),
-            self.rightAnchor.constraint(equalTo: self.rightAnchor),
-            self.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             //Constraints for star image
             starImage.heightAnchor.constraint(equalToConstant: 14),
@@ -159,9 +145,6 @@ class OwnerCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        //Setting white background color for cell
-        self.backgroundColor = .white
         
         setupSubViews()
         setupAutoLayout(stackView: stackViewVertical)

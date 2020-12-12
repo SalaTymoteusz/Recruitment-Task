@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 //TEMPORARY DATA STRUCTURE
 struct Owner {
     var repositoryName: String
@@ -20,6 +19,7 @@ class FirstViewController: UIViewController {
     var owners: [Owner] = [Owner]()
     let shareView = FirstView()
     let cellId = "cellId"
+    
     
     private func createOwnerArray() {
         owners.append(Owner(repositoryName: "Tymek", ownerImage: #imageLiteral(resourceName: "avatar"), repositoryStars: 5))
@@ -40,17 +40,14 @@ class FirstViewController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .white
-        view.addSubview(shareView)
-        
-        setupSafeArea()
-        setupTableView()
+        view = shareView
     }
     
     override func loadView() {
         super.loadView()
         createOwnerArray()
         setupView()
+        setupTableView()
     }
 }
 
@@ -58,39 +55,22 @@ class FirstViewController: UIViewController {
 extension FirstViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! OwnerCell
-        let currentLastItem = owners[indexPath.row]
+        
+        //style for cell
         cell.backgroundColor = .white
-        cell.owner = currentLastItem
         cell.selectionStyle = .none
+        
+        //data for cell
+        cell.repositoryNameLabel.text = owners[indexPath.row].repositoryName
+        cell.ownerImage.image = owners[indexPath.row].ownerImage
+        cell.repositoryStarsLabel.text = String(owners[indexPath.row].repositoryStars)
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return owners.count
-    }
-}
-
-// MARK: SAFE AREA
-extension FirstViewController {
-    private func setupSafeArea() {
-        let margins = view.layoutMarginsGuide
-         NSLayoutConstraint.activate([
-            shareView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            shareView.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
-         ])
-        if #available(iOS 11, *) {
-            let guide = view.safeAreaLayoutGuide
-          NSLayoutConstraint.activate([
-            shareView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-            guide.bottomAnchor.constraint(equalToSystemSpacingBelow: shareView.bottomAnchor, multiplier: 1.0)
-           ])
-        } else {
-           let standardSpacing: CGFloat = 8.0
-           NSLayoutConstraint.activate([
-            shareView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
-           bottomLayoutGuide.topAnchor.constraint(equalTo: shareView.bottomAnchor, constant: standardSpacing)
-           ])
-        }
     }
 }
