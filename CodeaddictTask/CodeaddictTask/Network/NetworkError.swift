@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+enum NetworkError: String, Error {
+    case dataError = "No data available"
+    case invalidRequestError = "Invalid Request"
+    case unknownError = "Unknown Error"
+    case statusCodeError = "Status Code Error"
+    case jsonDecodingError = "JSON Decoding Error"
+}

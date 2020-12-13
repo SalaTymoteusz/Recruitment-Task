@@ -71,8 +71,9 @@ class RepositoryCell: UITableViewCell {
     let stackViewHorizontal: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
         svh.distribution = .equalSpacing
+        svh.alignment = .leading
         svh.axis = .horizontal
-        svh.spacing = 4
+        svh.spacing = 0
         svh.translatesAutoresizingMaskIntoConstraints = false
         return svh
     }()
@@ -80,9 +81,9 @@ class RepositoryCell: UITableViewCell {
     //Creating stackView for repository name label and stackViewFirst
     let stackViewVertical: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
-        svh.distribution = .equalSpacing
+//        svh.distribution = .equalSpacing
         svh.axis = .vertical
-        svh.spacing = 4
+        svh.spacing = 0
         svh.translatesAutoresizingMaskIntoConstraints = false
         return svh
     }()
@@ -108,7 +109,7 @@ class RepositoryCell: UITableViewCell {
     }
     
     //Method for setting appropriate constraints
-    private func setupAutoLayout(stackView: UIStackView) {
+    private func setupAutoLayout(stackViewVertical: UIStackView, stackViewHorizontal: UIStackView) {
         NSLayoutConstraint.activate([
             
             //Constraints for star image
@@ -133,13 +134,12 @@ class RepositoryCell: UITableViewCell {
             grayView.leftAnchor.constraint(equalTo: self.leftAnchor),
             grayView.rightAnchor.constraint(equalTo: self.rightAnchor),
             
-            //Constraints for number of stars
-            repositoryStarsLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 4),
-                        
             //Constraints for main stackView, it contains name of repository
             //and stackView for star image and number of stars
-            stackView.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            stackView.leftAnchor.constraint(equalTo: ownerImage.rightAnchor, constant: 16),
+            stackViewVertical.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
+            stackViewVertical.leftAnchor.constraint(equalTo: ownerImage.rightAnchor, constant: 16),
+            
+            stackViewHorizontal.heightAnchor.constraint(equalTo: starImage.heightAnchor),
             
                 
         ])
@@ -149,7 +149,7 @@ class RepositoryCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupSubViews()
-        setupAutoLayout(stackView: stackViewVertical)
+        setupAutoLayout(stackViewVertical: stackViewVertical, stackViewHorizontal: stackViewHorizontal)
     }
     
     required init?(coder: NSCoder) {

@@ -58,6 +58,14 @@ class FirstView: UIView {
         return view
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spr = UIActivityIndicatorView()
+        spr.style = .large
+        spr.translatesAutoresizingMaskIntoConstraints = false
+        spr.isHidden = true
+        return spr
+    }()
+    
     //Method for setting constraints
     private func setupAutoLayout() {
         let bounds = UIScreen.main.bounds
@@ -90,7 +98,10 @@ class FirstView: UIView {
             tableView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            spinner.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     
@@ -101,6 +112,7 @@ class FirstView: UIView {
         contentView.addSubview(searchBar)
         contentView.addSubview(headerTitleLabel)
         contentView.addSubview(tableView)
+        contentView.addSubview(spinner)
     }
 
     //Method for setting view

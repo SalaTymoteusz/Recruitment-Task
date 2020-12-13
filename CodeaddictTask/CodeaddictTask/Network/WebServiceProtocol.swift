@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol WebServiceProtocol {
+    
+    typealias eventResult = (Result<Event, NetworkError>) -> Void
+    
+    static func loadData(url: URL, completion: @escaping eventResult)
+    
+}
