@@ -80,13 +80,19 @@ extension FirstViewController: UITableViewDataSource {
         //data for cell
         cell.repositoryNameLabel.text = event.repositories[0].items[indexPath.row].name
         cell.repositoryStarsLabel.text = String(event.repositories[0].items[indexPath.row].stargazers_count)
+        cell.ownerImage.image = UIImage()
         
+        cell.spinner.isHidden = false
+        cell.spinner.startAnimating()
         
         let url = URL(string: event.repositories[0].items[indexPath.row].owner.avatar_url)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            
             DispatchQueue.main.async {
                 cell.ownerImage.image = UIImage(data: data!)
+                cell.spinner.stopAnimating()
+                cell.spinner.isHidden = true
             }
         }
 

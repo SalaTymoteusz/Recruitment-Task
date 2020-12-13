@@ -37,7 +37,8 @@ class RepositoryCell: UITableViewCell {
     
     //Repository owner avatar
     let ownerImage: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "avatar"))
+        let imageView = UIImageView()
+        imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -65,6 +66,14 @@ class RepositoryCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    let spinner: UIActivityIndicatorView = {
+        let spr = UIActivityIndicatorView()
+        spr.style = .large
+        spr.translatesAutoresizingMaskIntoConstraints = false
+        spr.isHidden = true
+        return spr
     }()
     
     //Creating stackView for star image and number of stars label
@@ -105,6 +114,8 @@ class RepositoryCell: UITableViewCell {
         grayView.addSubview(ownerImage)
         grayView.addSubview(arrowImage)
         
+        ownerImage.addSubview(spinner)
+        
         addSubview(grayView)
     }
     
@@ -121,6 +132,9 @@ class RepositoryCell: UITableViewCell {
             ownerImage.heightAnchor.constraint(equalToConstant: 60),
             ownerImage.widthAnchor.constraint(equalToConstant: 60),
             ownerImage.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
+            
+            spinner.centerYAnchor.constraint(equalTo: ownerImage.centerYAnchor),
+            spinner.centerXAnchor.constraint(equalTo: ownerImage.centerXAnchor),
             
             //Constraints for arrow image
             arrowImage.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
