@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OwnerCell: UITableViewCell {
+class RepositoryCell: UITableViewCell {
     
     //Rounded cell background
     let grayView: UIView = {

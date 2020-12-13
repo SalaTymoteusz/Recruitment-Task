@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Owner {
+struct Repository {
     var repositoryName: String
     var ownerImage: UIImage
     var repositoryStars: Int
