@@ -41,8 +41,4 @@ class JSONParser {
         }
         dataTask.resume()
     }
-    
-    static func fetchImage(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
 }

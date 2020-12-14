@@ -85,6 +85,8 @@ extension FirstViewController: UITableViewDataSource {
         cell.spinner.isHidden = false
         cell.spinner.startAnimating()
         
+        
+        //Fix, pass it to external object class
         let url = URL(string: (event.repositories.items?[indexPath.row].owner?.avatar_url)!)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch

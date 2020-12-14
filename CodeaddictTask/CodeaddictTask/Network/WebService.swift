@@ -25,4 +25,18 @@ class WebService: WebServiceProtocol {
             }
         }
     }
+    
+    typealias imageResult = (Result<UIImage, NetworkError>) -> Void
+    
+    static func loadImage(url: URL, completion: @escaping imageResult) {
+        let url = URL(string: "")
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            
+            DispatchQueue.main.async {
+                completion(.success(UIImage(data: data!)!))
+//                return UIImage(data: data!)
+            }
+        }
+    }
 }

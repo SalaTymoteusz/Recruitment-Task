@@ -31,6 +31,15 @@ class SecoundViewController: UIViewController {
         shareView.numberOfStarsLabel.text = "Number of Stars (\(repository.stargazers_count!))"
         shareView.repoTitleLabel.text = repository.name
         
+        let url = URL(string: (repository.owner?.avatar_url)!)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            
+            DispatchQueue.main.async {
+                self.shareView.backgroundImage.image = UIImage(data: data!)
+            }
+        }
+        
         view = shareView
     }
     
