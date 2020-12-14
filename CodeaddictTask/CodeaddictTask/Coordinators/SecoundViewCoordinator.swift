@@ -23,6 +23,13 @@ class SecoundViewCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func startWithData(data: Repository) {
+        let vc = SecoundViewController()
+        vc.repository = data
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func didFinishBuying() {
         parentCoordinator?.childDidFinish(self)
     }

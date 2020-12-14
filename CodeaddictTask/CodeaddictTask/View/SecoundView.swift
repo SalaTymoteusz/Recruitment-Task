@@ -19,7 +19,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let repoAuthorNameLabel: UILabel = {
+    let repoAuthorNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .white
         lbl.text = "Repo Author Name"
@@ -29,7 +29,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let numberOfStarsLabel: UILabel = {
+    let numberOfStarsLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .lightGray
         lbl.text = "Number of Stars (234)"
@@ -39,7 +39,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let repoTitleLabel: UILabel = {
+    let repoTitleLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.text = "Repo Title"
@@ -97,7 +97,7 @@ class SecoundView: UIView {
     }()
     
     //Background image of repo author
-    private let backgroundImage: UIImageView = {
+    let backgroundImage: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "teacher"))
         imageView.tintColor = .lightGray
         imageView.contentMode = .scaleAspectFill

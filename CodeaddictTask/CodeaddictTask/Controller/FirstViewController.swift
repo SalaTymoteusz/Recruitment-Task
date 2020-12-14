@@ -78,14 +78,14 @@ extension FirstViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         //data for cell
-        cell.repositoryNameLabel.text = event.repositories[0].items[indexPath.row].name
-        cell.repositoryStarsLabel.text = String(event.repositories[0].items[indexPath.row].stargazers_count)
+        cell.repositoryNameLabel.text = event.repositories.items?[indexPath.row].name
+        cell.repositoryStarsLabel.text = String((event.repositories.items?[indexPath.row].stargazers_count)!)
         cell.ownerImage.image = UIImage()
         
         cell.spinner.isHidden = false
         cell.spinner.startAnimating()
         
-        let url = URL(string: event.repositories[0].items[indexPath.row].owner.avatar_url)
+        let url = URL(string: (event.repositories.items?[indexPath.row].owner?.avatar_url)!)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             
@@ -100,7 +100,7 @@ extension FirstViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = event.repositories.first?.items.count else {
+        guard let numberOfRows = event.repositories.items?.count else {
             return 0
         }
         return numberOfRows
@@ -112,7 +112,7 @@ extension FirstViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        coordinator?.cellTapped()
+        coordinator?.cellTapped(data: (event.repositories.items?[indexPath.row])!)
     }
 }
 
@@ -122,7 +122,7 @@ extension FirstViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         //remove data from event repositories array
-        event.repositories = []
+        event = Event()
         
         //remove cells from view
         updateUIWithRepositories()

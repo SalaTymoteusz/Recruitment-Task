@@ -10,7 +10,8 @@ import UIKit
 class SecoundViewController: UIViewController {
     
     weak var coordinator: SecoundViewCoordinator?
-    var commits: [Commit] = [Commit]()
+    var commits = [Commit]()
+    var repository = Repository()
     let shareView = SecoundView()
     let cellId = "CommitCell"
     
@@ -26,6 +27,10 @@ class SecoundViewController: UIViewController {
     }
     
     private func setupView() {
+        shareView.repoAuthorNameLabel.text = repository.owner?.login
+        shareView.numberOfStarsLabel.text = "Number of Stars (\(repository.stargazers_count!))"
+        shareView.repoTitleLabel.text = repository.name
+        
         view = shareView
     }
     
@@ -44,6 +49,7 @@ class SecoundViewController: UIViewController {
         
         setupView()
         setupTableView()
+        
     }
 }
 

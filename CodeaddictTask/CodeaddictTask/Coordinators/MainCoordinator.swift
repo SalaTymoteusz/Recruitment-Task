@@ -21,10 +21,10 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func cellTapped() {
+    func cellTapped(data: Repository) {
         let child = SecoundViewCoordinator(navigationController: navigationController)
         childCoordinators.append(child)
-        child.start()
+        child.startWithData(data: data)
         child.parentCoordinator = self
     }
     

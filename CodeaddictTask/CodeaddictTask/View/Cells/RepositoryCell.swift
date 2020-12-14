@@ -125,7 +125,6 @@ class RepositoryCell: UITableViewCell {
             
             //Constraints for main stackView, it contains name of repository
             //and stackView for star image and number of stars
-//            stackViewVertical.centerYAnchor.constraint(equalTo: ownerImage.centerYAnchor),
             stackViewVertical.topAnchor.constraint(equalTo: grayView.topAnchor, constant: 26),
             stackViewVertical.leftAnchor.constraint(equalTo: ownerImage.rightAnchor, constant: 16),
 

@@ -20,7 +20,7 @@ class WebService: WebServiceProtocol {
                 completion(.failure(error))
             case .success(let data):
                 let event = Event()
-                event.repositories.append(data)
+                event.repositories =  data
                 completion(.success(event))
             }
         }
