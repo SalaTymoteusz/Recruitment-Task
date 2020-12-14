@@ -10,4 +10,5 @@ import UIKit
 
 class Event {
     var repositories = TableOfRepositories()
+    var committs = Commit()
 }

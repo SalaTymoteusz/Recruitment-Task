@@ -8,8 +8,30 @@
 import Foundation
 import UIKit
 
-struct Commit {
-    var authorName: String
-    var authorEmail: String
-    var message: String
+struct Commits: Decodable {
+    let commit: Commit?
+
+    init() {
+        commit = nil
+    }
+}
+
+struct Commit: Decodable {
+    let committer: Committer?
+    let message: String?
+    
+    init() {
+        committer = nil
+        message = nil
+    }
+}
+
+struct Committer: Decodable {
+    let name: String?
+    let email: String?
+    
+    init() {
+        name = nil
+        email = nil
+    }
 }

@@ -10,16 +10,10 @@ import UIKit
 class SecoundViewController: UIViewController {
     
     weak var coordinator: SecoundViewCoordinator?
-    var commits = [Commit]()
+    var commits = [Commits]()
     var repository = Repository()
     let shareView = SecoundView()
     let cellId = "CommitCell"
-    
-    private func createCommitsArray() {
-        commits.append(Commit(authorName: "Commit author name", authorEmail: "email@authorname.com", message: "This is a shor commit messsage."))
-        commits.append(Commit(authorName: "Commit author name", authorEmail: "email@authorname.com", message: "This is a shor commit messsage."))
-        commits.append(Commit(authorName: "Commit author name", authorEmail: "email@authorname.com", message: "This is a commit message that needs to fold over to the next line."))
-    }
     
     private func setupTableView() {
         shareView.tableView.register(CommitCell.self, forCellReuseIdentifier: cellId)
@@ -31,16 +25,46 @@ class SecoundViewController: UIViewController {
         shareView.numberOfStarsLabel.text = "Number of Stars (\(repository.stargazers_count!))"
         shareView.repoTitleLabel.text = repository.name
         
+        shareView.spinner.isHidden = false
+        shareView.spinner.startAnimating()
+        
         let url = URL(string: (repository.owner?.avatar_url)!)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             
             DispatchQueue.main.async {
                 self.shareView.backgroundImage.image = UIImage(data: data!)
+                self.shareView.spinner.stopAnimating()
+                self.shareView.spinner.isHidden = true
             }
         }
         
         view = shareView
+    }
+    
+    
+    func downloadData() -> Void {
+        guard let repoName = repository.name, let ownerName = repository.owner?.login else {
+            return
+        }
+        let url = URL(string: "https://api.github.com/repos/\(ownerName)/\(repoName)/commits")!
+        
+//        shareView.spinner.isHidden = false
+//        shareView.spinner.startAnimating()
+        
+        WebService.loadCommits(url: url) { (result) in
+            switch result {
+            case.failure(let error):
+                print(error)
+            case.success(let data):
+                DispatchQueue.main.async() {
+                    self.commits = data
+                    self.shareView.tableView.reloadData()
+//                    self.shareView.spinner.stopAnimating()
+//                    self.shareView.spinner.isHidden = true
+                }
+            }
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,10 +78,10 @@ class SecoundViewController: UIViewController {
         
     override func loadView() {
         super.loadView()
-        createCommitsArray()
         
         setupView()
         setupTableView()
+        downloadData()
         
     }
 }
@@ -72,14 +96,18 @@ extension SecoundViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         //data for cell
-        cell.authorNameLabel.text = commits[indexPath.row].authorName
-        cell.authorEmailLabel.text = commits[indexPath.row].authorEmail
-        cell.messageLabel.text = commits[indexPath.row].message
+        cell.authorNameLabel.text = commits[indexPath.row].commit?.committer?.name
+        cell.authorEmailLabel.text = commits[indexPath.row].commit?.committer?.email
+        cell.messageLabel.text = commits[indexPath.row].commit?.message
+        
+        cell.counterDigit.text = "\(indexPath.row + 1)"
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        let numberOfRows = commits.isEmpty ? 0 : 3
+        return numberOfRows
     }
 }
 

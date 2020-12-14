@@ -98,7 +98,7 @@ class SecoundView: UIView {
     
     //Background image of repo author
     let backgroundImage: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "teacher"))
+        let imageView = UIImageView()
         imageView.tintColor = .lightGray
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -159,6 +159,14 @@ class SecoundView: UIView {
         return tbl
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spr = UIActivityIndicatorView()
+        spr.style = .large
+        spr.translatesAutoresizingMaskIntoConstraints = false
+        spr.isHidden = true
+        return spr
+    }()
+    
     //Method for setup stackViews
     private func setupStackViews() {
         
@@ -178,15 +186,18 @@ class SecoundView: UIView {
         self.addSubview(contentView)
         
         //Adding views
+        titleView.addSubview(repoTitleLabel)
+        titleView.addSubview(viewOnlineButton)
+        
+        backgroundImage.addSubview(spinner)
+        
         contentView.addSubview(backgroundImage)
         contentView.addSubview(stackViewVertical)
         contentView.addSubview(titleView)
         contentView.addSubview(shareRepoButton)
-        
-        titleView.addSubview(repoTitleLabel)
-        titleView.addSubview(viewOnlineButton)
         contentView.addSubview(tableView)
         contentView.addSubview(commitsHistoryLabel)
+        
     }
 
     private func setupView() {
@@ -205,6 +216,9 @@ class SecoundView: UIView {
             
             contentView.widthAnchor.constraint(equalToConstant: width),
             contentView.heightAnchor.constraint(equalToConstant: height),
+            
+            spinner.centerYAnchor.constraint(equalTo: backgroundImage.centerYAnchor),
+            spinner.centerXAnchor.constraint(equalTo: backgroundImage.centerXAnchor),
         
             //Constraints for
             backgroundImage.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -215,11 +229,9 @@ class SecoundView: UIView {
             stackViewVertical.bottomAnchor.constraint(equalTo: backgroundImage.bottomAnchor, constant: -22),
             stackViewVertical.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
 
-            
             starImage.heightAnchor.constraint(equalToConstant: 13),
             starImage.widthAnchor.constraint(equalToConstant: 13),
             starImage.centerYAnchor.constraint(equalTo: stackViewHorizontal.centerYAnchor),
-//            starImage.leftAnchor.constraint(equalTo: stackViewHorizontal.leftAnchor),
 
             titleView.heightAnchor.constraint(equalToConstant: 50),
             titleView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),

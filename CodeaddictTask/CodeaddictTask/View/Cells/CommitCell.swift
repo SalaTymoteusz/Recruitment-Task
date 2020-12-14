@@ -90,7 +90,7 @@ class CommitCell: UITableViewCell {
             
             counterDigit.centerYAnchor.constraint(equalTo: counterView.centerYAnchor),
             counterDigit.centerXAnchor.constraint(equalTo: counterView.centerXAnchor),
-            counterDigit.widthAnchor.constraint(equalToConstant: 8),
+            counterDigit.widthAnchor.constraint(equalToConstant: 10),
             counterDigit.heightAnchor.constraint(equalToConstant: 20),
             
             stackViewVertical.leftAnchor.constraint(equalTo: counterView.rightAnchor, constant: 20),

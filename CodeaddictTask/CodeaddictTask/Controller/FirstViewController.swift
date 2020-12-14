@@ -83,8 +83,7 @@ extension FirstViewController: UITableViewDataSource {
         cell.ownerImage.image = UIImage()
         
         cell.spinner.isHidden = false
-        cell.spinner.startAnimating()
-        
+        cell.spinner.startAnimating()        
         
         //Fix, pass it to external object class
         let url = URL(string: (event.repositories.items?[indexPath.row].owner?.avatar_url)!)

@@ -12,6 +12,8 @@ import UIKit
 class WebService: WebServiceProtocol {
     
     typealias eventResult = (Result<Event, NetworkError>) -> Void
+    typealias commitsResult = (Result<[Commits], NetworkError>) -> Void
+    typealias imageResult = (Result<UIImage, NetworkError>) -> Void
     
     static func loadData(url: URL, completion: @escaping eventResult) {
         JSONParser.fetchData(of: TableOfRepositories.self, from: url) { (result) in
@@ -26,7 +28,16 @@ class WebService: WebServiceProtocol {
         }
     }
     
-    typealias imageResult = (Result<UIImage, NetworkError>) -> Void
+    static func loadCommits(url: URL, completion: @escaping commitsResult) {
+        JSONParser.fetchDataFromArray(of: Commits.self, from: url) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let data):
+                completion(.success(data))
+            }
+        }
+    }
     
     static func loadImage(url: URL, completion: @escaping imageResult) {
         let url = URL(string: "")

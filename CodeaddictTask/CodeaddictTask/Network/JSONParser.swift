@@ -10,6 +10,7 @@ import Foundation
 class JSONParser {
     
     typealias result<T> = (Result<T, NetworkError>) -> Void
+    typealias resultFromArray<T> = (Result<[T], NetworkError>) -> Void
     
     static func fetchData<T: Decodable>(of type: T.Type, from url: URL, completion: @escaping result<T>) {
 
@@ -33,6 +34,34 @@ class JSONParser {
             
             do {
                 let obj: T = try JSONDecoder().decode(T.self, from: jsonData)
+                completion(.success(obj))
+            }catch {
+                let err = NetworkError.jsonDecodingError
+                completion(.failure(err))
+            }
+        }
+        dataTask.resume()
+    }
+    
+    static func fetchDataFromArray<T: Decodable>(of type: T.Type, from url: URL, completion: @escaping resultFromArray<T>) {
+
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 200
+            
+            if statusCode != 200 {
+                completion(.failure(.invalidRequestError))
+              return
+            }
+
+            guard let jsonData = data else {
+                let err = NetworkError.dataError
+                completion(.failure(err))
+                return
+            }
+            
+            do {
+                let obj: [T] = try JSONDecoder().decode([T].self, from: jsonData)
                 completion(.success(obj))
             }catch {
                 let err = NetworkError.jsonDecodingError
