@@ -95,7 +95,9 @@ class CommitCell: UITableViewCell {
             
             stackViewVertical.leftAnchor.constraint(equalTo: counterView.rightAnchor, constant: 20),
             stackViewVertical.topAnchor.constraint(equalTo: self.topAnchor),
-            stackViewVertical.rightAnchor.constraint(equalTo: self.rightAnchor)
+            stackViewVertical.rightAnchor.constraint(equalTo: self.rightAnchor),
+            
+//            messageLabel.topAnchor.constraint(equalTo: authorEmailLabel.bottomAnchor, constant: 0)
         ])
     }
     

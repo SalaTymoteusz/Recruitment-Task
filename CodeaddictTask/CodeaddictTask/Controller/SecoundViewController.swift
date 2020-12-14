@@ -18,15 +18,28 @@ class SecoundViewController: UIViewController {
     private func setupTableView() {
         shareView.tableView.register(CommitCell.self, forCellReuseIdentifier: cellId)
         shareView.tableView.dataSource = self
+        shareView.tableView.delegate = self
     }
     
-    private func setupView() {
+    private func spinnerStart() {
+        shareView.spinner.isHidden = false
+        shareView.spinner.startAnimating()
+    }
+    
+    private func spinnerStop() {
+        shareView.spinner.stopAnimating()
+        shareView.spinner.isHidden = true
+    }
+    
+    private func setupViewData() {
         shareView.repoAuthorNameLabel.text = repository.owner?.login
         shareView.numberOfStarsLabel.text = "Number of Stars (\(repository.stargazers_count!))"
         shareView.repoTitleLabel.text = repository.name
-        
-        shareView.spinner.isHidden = false
-        shareView.spinner.startAnimating()
+    }
+    
+    private func setupView() {
+        setupViewData()
+        spinnerStart()
         
         let url = URL(string: (repository.owner?.avatar_url)!)
         DispatchQueue.global().async {
@@ -34,12 +47,10 @@ class SecoundViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.shareView.backgroundImage.image = UIImage(data: data!)
-                self.shareView.spinner.stopAnimating()
-                self.shareView.spinner.isHidden = true
+                self.spinnerStop()
             }
         }
-        
-        view = shareView
+//        self.view = shareView
     }
     
     
@@ -49,8 +60,8 @@ class SecoundViewController: UIViewController {
         }
         let url = URL(string: "https://api.github.com/repos/\(ownerName)/\(repoName)/commits")!
         
-//        shareView.spinner.isHidden = false
-//        shareView.spinner.startAnimating()
+        shareView.tableViewSpinner.isHidden = false
+        shareView.tableViewSpinner.startAnimating()
         
         WebService.loadCommits(url: url) { (result) in
             switch result {
@@ -60,8 +71,9 @@ class SecoundViewController: UIViewController {
                 DispatchQueue.main.async() {
                     self.commits = data
                     self.shareView.tableView.reloadData()
-//                    self.shareView.spinner.stopAnimating()
-//                    self.shareView.spinner.isHidden = true
+                    self.shareView.tableViewSpinner.stopAnimating()
+                    self.shareView.tableViewSpinner.isHidden = true
+                    self.shareView.tableView.separatorColor = .gray
                 }
             }
         }
@@ -78,15 +90,24 @@ class SecoundViewController: UIViewController {
         
     override func loadView() {
         super.loadView()
+        view.addSubview(shareView.contentView)
         
         setupView()
         setupTableView()
         downloadData()
         
+            
+        shareView.shareRepoButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
+        shareView.viewOnlineButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
+        
+    }
+    
+    @objc private func shareRepo() {
+        print("share repo")
     }
 }
 
-extension SecoundViewController: UITableViewDataSource {
+extension SecoundViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CommitCell
@@ -106,7 +127,7 @@ extension SecoundViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRows = commits.isEmpty ? 0 : 3
+        let numberOfRows = commits.isEmpty ? 0 : 13
         return numberOfRows
     }
 }

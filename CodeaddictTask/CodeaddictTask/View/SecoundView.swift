@@ -9,7 +9,7 @@ import UIKit
 
 class SecoundView: UIView {
 
-    private let repoByLabel: UILabel = {
+    let repoByLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .lightGray
         lbl.textAlignment = .left
@@ -49,7 +49,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let commitsHistoryLabel: UILabel = {
+    let commitsHistoryLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.text = "Commits History"
@@ -59,7 +59,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let shareRepoLabel: UILabel = {
+    let shareRepoLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .blue
         lbl.textAlignment = .center
@@ -68,7 +68,7 @@ class SecoundView: UIView {
         return lbl
     }()
     
-    private let viewOnlineButton: UIButton = {
+    let viewOnlineButton: UIButton = {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.clipsToBounds = true
@@ -80,7 +80,7 @@ class SecoundView: UIView {
         return btn
     }()
     
-    private let shareRepoButton: UIButton = {
+    let shareRepoButton: UIButton = {
         let btn = UIButton()
         btn.clipsToBounds = true
         btn.layer.cornerRadius = 5
@@ -107,7 +107,7 @@ class SecoundView: UIView {
     }()
     
     //Image of star
-    private let starImage: UIImageView = {
+    let starImage: UIImageView = {
         let star = UIImage(systemName: "star")
         let imageView = UIImageView(image: star)
         imageView.tintColor = .lightGray
@@ -117,7 +117,7 @@ class SecoundView: UIView {
         return imageView
     }()
     
-    private let stackViewHorizontal: UIStackView = {
+    let stackViewHorizontal: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
 //        svh.distribution = .equalSpacing
         svh.axis = .horizontal
@@ -126,7 +126,7 @@ class SecoundView: UIView {
         return svh
     }()
     
-    private let stackViewVertical: UIStackView = {
+    let stackViewVertical: UIStackView = {
         let svh = UIStackView(arrangedSubviews: [UIView(), UIView()])
         svh.distribution = .fill
         svh.axis = .vertical
@@ -136,14 +136,14 @@ class SecoundView: UIView {
         return svh
     }()
     
-    private let contentView: UIView = {
+    let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let titleView: UIView = {
+    let titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -152,14 +152,22 @@ class SecoundView: UIView {
     
     let tableView: UITableView = {
         let tbl = UITableView()
-        tbl.rowHeight = 100
-        tbl.translatesAutoresizingMaskIntoConstraints = false
+        tbl.rowHeight = 50
         tbl.backgroundColor = .white
-        tbl.isUserInteractionEnabled = false
+        tbl.separatorColor = .white
+        tbl.translatesAutoresizingMaskIntoConstraints = false
         return tbl
     }()
     
     let spinner: UIActivityIndicatorView = {
+        let spr = UIActivityIndicatorView()
+        spr.style = .large
+        spr.translatesAutoresizingMaskIntoConstraints = false
+        spr.isHidden = true
+        return spr
+    }()
+    
+    let tableViewSpinner: UIActivityIndicatorView = {
         let spr = UIActivityIndicatorView()
         spr.style = .large
         spr.translatesAutoresizingMaskIntoConstraints = false
@@ -195,14 +203,14 @@ class SecoundView: UIView {
         contentView.addSubview(stackViewVertical)
         contentView.addSubview(titleView)
         contentView.addSubview(shareRepoButton)
-        contentView.addSubview(tableView)
         contentView.addSubview(commitsHistoryLabel)
+//        contentView.addSubview(tableViewSpinner)
+        contentView.addSubview(tableView)
         
     }
 
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .white
         setupSubViews()
         setupAutoLayout(stackView: stackViewVertical)
     }
@@ -219,6 +227,9 @@ class SecoundView: UIView {
             
             spinner.centerYAnchor.constraint(equalTo: backgroundImage.centerYAnchor),
             spinner.centerXAnchor.constraint(equalTo: backgroundImage.centerXAnchor),
+            
+//            tableViewSpinner.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
+//            tableViewSpinner.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
         
             //Constraints for
             backgroundImage.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -254,9 +265,10 @@ class SecoundView: UIView {
             shareRepoButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -44),
             
             tableView.topAnchor.constraint(equalTo: commitsHistoryLabel.bottomAnchor, constant: 10), // 383
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -95),
+//            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -95),
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
+            tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            tableView.bottomAnchor.constraint(equalTo: shareRepoButton.topAnchor, constant: -10),
         ])
     }
 
