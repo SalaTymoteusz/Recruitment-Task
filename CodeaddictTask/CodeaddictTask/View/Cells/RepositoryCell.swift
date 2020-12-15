@@ -48,7 +48,7 @@ class RepositoryCell: UITableViewCell {
     
     //Image of star
     let starImage: UIImageView = {
-        let star = UIImage(systemName: "star")
+        let star = UIImage(named: "starIcon")
         let imageView = UIImageView(image: star)
         imageView.tintColor = .lightGray
         imageView.contentMode = .scaleAspectFit
@@ -130,8 +130,8 @@ class RepositoryCell: UITableViewCell {
 
             
             //Constraints for star image
-            starImage.heightAnchor.constraint(equalToConstant: 14),
-            starImage.widthAnchor.constraint(equalToConstant: 14),
+            starImage.heightAnchor.constraint(equalToConstant: 13),
+            starImage.widthAnchor.constraint(equalToConstant: 13),
             starImage.centerYAnchor.constraint(equalTo: repositoryStarsLabel.centerYAnchor),
             
             starImage.leftAnchor.constraint(equalTo: starsView.leftAnchor),
