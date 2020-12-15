@@ -227,9 +227,6 @@ class SecoundView: UIView {
             
             spinner.centerYAnchor.constraint(equalTo: backgroundImage.centerYAnchor),
             spinner.centerXAnchor.constraint(equalTo: backgroundImage.centerXAnchor),
-            
-//            tableViewSpinner.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
-//            tableViewSpinner.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
         
             //Constraints for
             backgroundImage.topAnchor.constraint(equalTo: contentView.topAnchor),

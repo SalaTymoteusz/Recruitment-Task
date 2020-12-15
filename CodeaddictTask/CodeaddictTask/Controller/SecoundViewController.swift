@@ -15,10 +15,38 @@ class SecoundViewController: UIViewController {
     let shareView = SecoundView()
     let cellId = "CommitCell"
     
+    override func loadView() {
+        super.loadView()
+        setupView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinishBuying()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
+    
+    private func setupView() {
+        view.addSubview(shareView.contentView)
+        downloadAvatar()
+        downloadData()
+        setupViewData()
+        setupTableView()
+        addTargets()
+    }
+
     private func setupTableView() {
         shareView.tableView.register(CommitCell.self, forCellReuseIdentifier: cellId)
         shareView.tableView.dataSource = self
         shareView.tableView.delegate = self
+    }
+    
+    private func addTargets() {
+        shareView.shareRepoButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
+        shareView.viewOnlineButton.addTarget(self, action: #selector(viewOnline), for: .touchUpInside)
     }
     
     private func spinnerStart(spinner: UIActivityIndicatorView) {
@@ -41,12 +69,6 @@ class SecoundViewController: UIViewController {
             shareView.numberOfStarsLabel.text = "Number of Stars ()"
             shareView.repoTitleLabel.text = ""
         }
-        
-    }
-    
-    private func setupView() {
-        downloadAvatar()
-        setupViewData()
     }
     
     func downloadData() -> Void {
@@ -96,34 +118,8 @@ class SecoundViewController: UIViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-          return .lightContent
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        coordinator?.didFinishBuying()
-    }
-        
-    override func loadView() {
-        super.loadView()
-        view.addSubview(shareView.contentView)
-        
-        setupView()
-        setupTableView()
-        downloadData()
-        
-        addTargets()
-    }
-    
-    private func addTargets() {
-        shareView.shareRepoButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
-        shareView.viewOnlineButton.addTarget(self, action: #selector(viewOnline), for: .touchUpInside)
-    }
-    
+    //MARK: OBJECTIVE-C METHODS
     @objc private func viewOnline() {
-        print("view online")
-        
         guard let link = repository.html_url else {
             return
         }
@@ -134,12 +130,10 @@ class SecoundViewController: UIViewController {
     }
     
     @objc private func shareRepo() {
-
         // text to share
         guard let link = repository.html_url else {
             return
         }
-
         // set up activity view controller
         let linkToShare = [ link ]
         let activityViewController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
@@ -150,7 +144,6 @@ class SecoundViewController: UIViewController {
 
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
-
     }
 }
 
@@ -158,14 +151,10 @@ extension SecoundViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CommitCell
-        
+                
         //style for cell
         cell.backgroundColor = .white
         cell.selectionStyle = .none
-        
-        //sprawdzić odległości
-        //sprawdzić kolory
-        //sprawdzić na tablecie
         
         //data for cell
         cell.counterDigit.text = "\(indexPath.row + 1)"
@@ -196,15 +185,10 @@ extension SecoundViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRows = commits.isEmpty ? 0 : 3
         return numberOfRows
     }
-
 }
 
