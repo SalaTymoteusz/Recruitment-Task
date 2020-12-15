@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct TableOfRepositories: Decodable {
+struct Repositories: Decodable {
     let items: [Repository]?
     
     init() {

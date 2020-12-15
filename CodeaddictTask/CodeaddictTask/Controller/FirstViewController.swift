@@ -10,56 +10,83 @@ import UIKit
 class FirstViewController: UIViewController {
     
     weak var coordinator: MainCoordinator?
-    var event = Event()
+    var repositories = Repositories()
     let shareView = FirstView()
-    let cellId = "cellId"
+    let cellId = "RepositoryCell"
     
-//    private func createOwnerArray() {
-//        repositories.append(Repository(repositoryName: "Tymek", ownerImage: #imageLiteral(resourceName: "avatar"), repositoryStars: 5))
 
     override func loadView() {
         super.loadView()
-        
         setupView()
+    }
+    
+    private func setupView() {
+        view = shareView
         setupTableView()
         setupSearchBar()
+        downloadData(topic: "Swift")
     }
     
-    func updateUIWithRepositories() {
-        shareView.tableView.reloadData()
-    }
-    
-    func setupView() {
-        view = shareView
-    }
-    
-    func setupTableView() {
+    private func setupTableView() {
         shareView.tableView.register(RepositoryCell.self, forCellReuseIdentifier: cellId)
         shareView.tableView.dataSource = self
         shareView.tableView.delegate = self
     }
     
-    func setupSearchBar() {
+    private func setupSearchBar() {
         shareView.searchBar.delegate = self
     }
     
-    func downloadData(topic: String) -> Void {
+    private func updateUIWithRepositories() {
+        shareView.tableView.reloadData()
+    }
+    
+    private func spinnerStart(spinner: UIActivityIndicatorView) {
+        spinner.isHidden = false
+        spinner.startAnimating()
+    }
+    
+    private func spinnerStop(spinner: UIActivityIndicatorView) {
+        spinner.stopAnimating()
+        spinner.isHidden = true
+    }
+    
+    private func downloadData(topic: String) -> Void {
         
         let url = URL(string: "https://api.github.com/search/repositories?q=language:\(topic)&sort=stars")!
         
-        shareView.spinner.isHidden = false
-        shareView.spinner.startAnimating()
+        spinnerStart(spinner: shareView.spinner)
         
-        WebService.loadData(url: url) { (result) in
+        WebService.loadData(url: url) { [self] (result) in
             switch result {
             case.failure(let error):
                 print(error)
-            case.success(let event):
+                spinnerStop(spinner: shareView.spinner)
+                //Show error on the screen
+            case.success(let data):
                 DispatchQueue.main.async() {
-                    self.event = event
-                    self.shareView.spinner.stopAnimating()
-                    self.shareView.spinner.isHidden = true
-                    self.updateUIWithRepositories()
+                    repositories = data
+                    spinnerStop(spinner: shareView.spinner)
+                    updateUIWithRepositories()
+                }
+            }
+        }
+    }
+    
+    private func downloadAvatar(url: URL, cell: RepositoryCell) -> Void {
+        //Cell spinner start
+        spinnerStart(spinner: cell.spinner)
+        
+        WebService.loadImage(url: url) { [self] (result) in
+            switch result {
+            case.failure(let error):
+                print(error)
+                spinnerStop(spinner: cell.spinner)
+                //Show error on the screen
+            case.success(let img):
+                DispatchQueue.main.async() {
+                    cell.ownerImage.image = img
+                    spinnerStop(spinner: cell.spinner)
                 }
             }
         }
@@ -73,35 +100,35 @@ extension FirstViewController: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! RepositoryCell
 
-        //style for cell
+        //Style for cell
         cell.backgroundColor = .white
         cell.selectionStyle = .none
         
-        //data for cell
-        cell.repositoryNameLabel.text = event.repositories.items?[indexPath.row].name
-        cell.repositoryStarsLabel.text = String((event.repositories.items?[indexPath.row].stargazers_count)!)
+        //Unwrap data for cell
+        if let repositoryName = repositories.items?[indexPath.row].name,
+           let repositoryStars = repositories.items?[indexPath.row].stargazers_count {
+            cell.repositoryNameLabel.text = repositoryName
+            cell.repositoryStarsLabel.text = String(repositoryStars)
+        } else {
+            cell.repositoryNameLabel.text = ""
+            cell.repositoryStarsLabel.text = ""
+        }
+        
         cell.ownerImage.image = UIImage()
         
-        cell.spinner.isHidden = false
-        cell.spinner.startAnimating()        
-        
         //Fix, pass it to external object class
-        let url = URL(string: (event.repositories.items?[indexPath.row].owner?.avatar_url)!)
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            
-            DispatchQueue.main.async {
-                cell.ownerImage.image = UIImage(data: data!)
-                cell.spinner.stopAnimating()
-                cell.spinner.isHidden = true
-            }
+        guard let avatarURL = repositories.items?[indexPath.row].owner?.avatar_url else {
+            return cell
         }
-
+        
+        let url = URL(string: avatarURL)!
+        downloadAvatar(url: url, cell: cell)
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = event.repositories.items?.count else {
+        guard let numberOfRows = repositories.items?.count else {
             return 0
         }
         return numberOfRows
@@ -112,8 +139,11 @@ extension FirstViewController: UITableViewDataSource {
 extension FirstViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        coordinator?.cellTapped(data: (event.repositories.items?[indexPath.row])!)
+        
+        guard let data = repositories.items?[indexPath.row] else {
+            return
+        }
+        coordinator?.cellTapped(data: data)
     }
 }
 
@@ -123,7 +153,7 @@ extension FirstViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         //remove data from event repositories array
-        event = Event()
+        repositories = Repositories()
         
         //remove cells from view
         updateUIWithRepositories()

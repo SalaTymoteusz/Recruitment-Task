@@ -24,6 +24,7 @@ class FirstView: UIView {
         let shb = UISearchBar()
         shb.sizeToFit()
         shb.placeholder = "Search"
+        shb.text = "Swift"
         shb.isTranslucent = false
         shb.backgroundImage = UIImage()
         shb.backgroundColor = .lightGray

@@ -9,8 +9,8 @@ import Foundation
 
 protocol WebServiceProtocol {
     
-    typealias eventResult = (Result<Event, NetworkError>) -> Void
+    typealias repositoriesResult = (Result<Repositories, NetworkError>) -> Void
     
-    static func loadData(url: URL, completion: @escaping eventResult)
+    static func loadData(url: URL, completion: @escaping repositoriesResult)
     
 }

@@ -21,38 +21,33 @@ class SecoundViewController: UIViewController {
         shareView.tableView.delegate = self
     }
     
-    private func spinnerStart() {
-        shareView.spinner.isHidden = false
-        shareView.spinner.startAnimating()
+    private func spinnerStart(spinner: UIActivityIndicatorView) {
+        spinner.isHidden = false
+        spinner.startAnimating()
     }
     
-    private func spinnerStop() {
-        shareView.spinner.stopAnimating()
-        shareView.spinner.isHidden = true
+    private func spinnerStop(spinner: UIActivityIndicatorView) {
+        spinner.stopAnimating()
+        spinner.isHidden = true
     }
     
     private func setupViewData() {
-        shareView.repoAuthorNameLabel.text = repository.owner?.login
-        shareView.numberOfStarsLabel.text = "Number of Stars (\(repository.stargazers_count!))"
-        shareView.repoTitleLabel.text = repository.name
+        if let repoAuthorName = repository.owner?.login, let numberOfStars = repository.stargazers_count, let repoTitle = repository.name {
+            shareView.repoAuthorNameLabel.text = repoAuthorName
+            shareView.numberOfStarsLabel.text = "Number of Stars (\(numberOfStars))"
+            shareView.repoTitleLabel.text = repoTitle
+        } else {
+            shareView.repoAuthorNameLabel.text = ""
+            shareView.numberOfStarsLabel.text = "Number of Stars ()"
+            shareView.repoTitleLabel.text = ""
+        }
+        
     }
     
     private func setupView() {
+        downloadAvatar()
         setupViewData()
-        spinnerStart()
-        
-        let url = URL(string: (repository.owner?.avatar_url)!)
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            
-            DispatchQueue.main.async {
-                self.shareView.backgroundImage.image = UIImage(data: data!)
-                self.spinnerStop()
-            }
-        }
-//        self.view = shareView
     }
-    
     
     func downloadData() -> Void {
         guard let repoName = repository.name, let ownerName = repository.owner?.login else {
@@ -60,20 +55,42 @@ class SecoundViewController: UIViewController {
         }
         let url = URL(string: "https://api.github.com/repos/\(ownerName)/\(repoName)/commits")!
         
-        shareView.tableViewSpinner.isHidden = false
-        shareView.tableViewSpinner.startAnimating()
+        spinnerStart(spinner: shareView.tableViewSpinner)
         
         WebService.loadCommits(url: url) { (result) in
             switch result {
             case.failure(let error):
                 print(error)
             case.success(let data):
+                DispatchQueue.main.async() { [self] in
+                    commits = data
+                    shareView.tableView.reloadData()
+                    spinnerStop(spinner: self.shareView.tableViewSpinner)
+                    shareView.tableView.separatorColor = .gray
+                }
+            }
+        }
+    }
+    
+    private func downloadAvatar() -> Void {
+        spinnerStart(spinner: shareView.spinner)
+        
+        guard let avatarURL = repository.owner?.avatar_url else {
+            return
+        }
+        
+        let url = URL(string: avatarURL)!
+
+        WebService.loadImage(url: url) { [self] (result) in
+            switch result {
+            case.failure(let error):
+                print(error)
+                spinnerStop(spinner: shareView.spinner)
+                //Show error on the screen
+            case.success(let img):
                 DispatchQueue.main.async() {
-                    self.commits = data
-                    self.shareView.tableView.reloadData()
-                    self.shareView.tableViewSpinner.stopAnimating()
-                    self.shareView.tableViewSpinner.isHidden = true
-                    self.shareView.tableView.separatorColor = .gray
+                    shareView.backgroundImage.image = img
+                    spinnerStop(spinner: shareView.spinner)
                 }
             }
         }
@@ -96,14 +113,37 @@ class SecoundViewController: UIViewController {
         setupTableView()
         downloadData()
         
-            
+        addTargets()
+    }
+    
+    private func addTargets() {
         shareView.shareRepoButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
-        shareView.viewOnlineButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
-        
+        shareView.viewOnlineButton.addTarget(self, action: #selector(viewOnline), for: .touchUpInside)
+    }
+    @objc private func viewOnline() {
+        print("view online")
+        if let url = URL(string: "https://www.hackingwithswift.com") {
+            UIApplication.shared.open(url)
+        }
     }
     
     @objc private func shareRepo() {
-        print("share repo")
+
+        
+        // text to share
+        let text = "This is some text that I want to share."
+
+        // set up activity view controller
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+
     }
 }
 
@@ -116,19 +156,48 @@ extension SecoundViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .white
         cell.selectionStyle = .none
         
-        //data for cell
-        cell.authorNameLabel.text = commits[indexPath.row].commit?.committer?.name
-        cell.authorEmailLabel.text = commits[indexPath.row].commit?.committer?.email
-        cell.messageLabel.text = commits[indexPath.row].commit?.message
+        //sprawdzić odległości
+        //sprawdzić kolory
+        //sprawdzić na tablecie
         
+        //data for cell
         cell.counterDigit.text = "\(indexPath.row + 1)"
         
+        //Check if data exists
+        if let authorName = commits[indexPath.row].commit?.committer?.name {
+            cell.authorNameLabel.text = authorName
+        } else {
+            cell.authorNameLabel.text = ""
+        }
+        
+        if let authorEmail = commits[indexPath.row].commit?.committer?.email {
+            cell.authorEmailLabel.text = authorEmail
+        } else {
+            cell.authorEmailLabel.text = ""
+        }
+        
+        if let message = commits[indexPath.row].commit?.message {
+            cell.messageLabel.text = message
+        } else {
+            cell.messageLabel.text = ""
+        }
+ 
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRows = commits.isEmpty ? 0 : 13
+        let numberOfRows = commits.isEmpty ? 0 : 3
         return numberOfRows
     }
+
 }
 

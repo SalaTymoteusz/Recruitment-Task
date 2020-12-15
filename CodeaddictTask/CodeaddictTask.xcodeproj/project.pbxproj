@@ -27,7 +27,6 @@
 		A98AFA60258548A900816AED /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA5F258548A900816AED /* Commit.swift */; };
 		A98AFA82258552B300816AED /* WebServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA81258552B300816AED /* WebServiceProtocol.swift */; };
 		A98AFA8A258552E400816AED /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFA89258552E400816AED /* WebService.swift */; };
-		A98AFABB25867DF400816AED /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFABA25867DF400816AED /* Event.swift */; };
 		A98AFAC025867E4300816AED /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFABF25867E4300816AED /* JSONParser.swift */; };
 		A98AFAC525867E6500816AED /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AFAC425867E6500816AED /* NetworkError.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +75,6 @@
 		A98AFA5F258548A900816AED /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		A98AFA81258552B300816AED /* WebServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceProtocol.swift; sourceTree = "<group>"; };
 		A98AFA89258552E400816AED /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		A98AFABA25867DF400816AED /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A98AFABF25867E4300816AED /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		A98AFAC425867E6500816AED /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,7 +190,6 @@
 			children = (
 				A98AFA5A2585485100816AED /* Repository.swift */,
 				A98AFA5F258548A900816AED /* Commit.swift */,
-				A98AFABA25867DF400816AED /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,7 +372,6 @@
 				A98AFA82258552B300816AED /* WebServiceProtocol.swift in Sources */,
 				A98AFA3B2585347B00816AED /* SecoundViewCoordinator.swift in Sources */,
 				A98AFA36258523AF00816AED /* MainCoordinator.swift in Sources */,
-				A98AFABB25867DF400816AED /* Event.swift in Sources */,
 				A98AFA082583F76F00816AED /* FirstView.swift in Sources */,
 				A98AFAC025867E4300816AED /* JSONParser.swift in Sources */,
 				A98AFA2C258421D000816AED /* CommitCell.swift in Sources */,

@@ -152,7 +152,7 @@ class SecoundView: UIView {
     
     let tableView: UITableView = {
         let tbl = UITableView()
-        tbl.rowHeight = 50
+//        tbl.rowHeight = 50
         tbl.backgroundColor = .white
         tbl.separatorColor = .white
         tbl.translatesAutoresizingMaskIntoConstraints = false

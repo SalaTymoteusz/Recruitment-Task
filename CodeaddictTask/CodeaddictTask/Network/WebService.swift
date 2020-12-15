@@ -4,26 +4,23 @@
 //
 //  Created by xxx on 12/12/2020.
 
-//let url = URL(string: "https://api.github.com/search/repositories?q=language:swift&sort=stars")!
 
 import Foundation
 import UIKit
 
 class WebService: WebServiceProtocol {
     
-    typealias eventResult = (Result<Event, NetworkError>) -> Void
+    typealias repositoriesResult = (Result<Repositories, NetworkError>) -> Void
     typealias commitsResult = (Result<[Commits], NetworkError>) -> Void
     typealias imageResult = (Result<UIImage, NetworkError>) -> Void
     
-    static func loadData(url: URL, completion: @escaping eventResult) {
-        JSONParser.fetchData(of: TableOfRepositories.self, from: url) { (result) in
+    static func loadData(url: URL, completion: @escaping repositoriesResult) {
+        JSONParser.fetchData(of: Repositories.self, from: url) { (result) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let data):
-                let event = Event()
-                event.repositories =  data
-                completion(.success(event))
+                completion(.success(data))
             }
         }
     }
@@ -40,14 +37,33 @@ class WebService: WebServiceProtocol {
     }
     
     static func loadImage(url: URL, completion: @escaping imageResult) {
-        let url = URL(string: "")
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             
-            DispatchQueue.main.async {
-                completion(.success(UIImage(data: data!)!))
-//                return UIImage(data: data!)
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                completion(.failure(.statusCodeError))
+                return
             }
+            
+            if statusCode != 200 {
+                completion(.failure(.invalidRequestError))
+              return
+            }
+            
+            guard let data = data else {
+                let err = NetworkError.dataError
+                completion(.failure(err))
+                return
+            }
+            
+            guard let image = UIImage(data: data) else {
+                let err = NetworkError.dataError
+                completion(.failure(err))
+                return
+            }
+            
+            completion(.success(image))
+            
         }
+        task.resume()
     }
 }

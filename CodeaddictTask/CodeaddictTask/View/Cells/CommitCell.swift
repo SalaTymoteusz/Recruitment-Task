@@ -60,27 +60,18 @@ class CommitCell: UITableViewCell {
         return view
     }()
     
-    let stackViewVertical: UIStackView = {
-        let svh = UIStackView(arrangedSubviews: [UIView(), UIView(), UIView()])
-        svh.distribution = .equalSpacing
-        svh.axis = .vertical
-        svh.spacing = 4
-        svh.translatesAutoresizingMaskIntoConstraints = false
-        return svh
-    }()
-    
     private func setupSubViews() {
+        
         counterView.addSubview(counterDigit)
-        stackViewVertical.addArrangedSubview(authorNameLabel)
-        stackViewVertical.addArrangedSubview(authorEmailLabel)
-        stackViewVertical.addArrangedSubview(messageLabel)
         
         addSubview(counterView)
-        addSubview(stackViewVertical)
+        addSubview(authorNameLabel)
+        addSubview(authorEmailLabel)
+        addSubview(messageLabel)
     }
     
     //Method for setting appropriate constraints
-    private func setupAutoLayout(stackView: UIStackView) {
+    private func setupAutoLayout() {
         NSLayoutConstraint.activate([
                         
             counterView.heightAnchor.constraint(equalToConstant: 36),
@@ -93,11 +84,23 @@ class CommitCell: UITableViewCell {
             counterDigit.widthAnchor.constraint(equalToConstant: 10),
             counterDigit.heightAnchor.constraint(equalToConstant: 20),
             
-            stackViewVertical.leftAnchor.constraint(equalTo: counterView.rightAnchor, constant: 20),
-            stackViewVertical.topAnchor.constraint(equalTo: self.topAnchor),
-            stackViewVertical.rightAnchor.constraint(equalTo: self.rightAnchor),
+            authorNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 76),
+            authorEmailLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 76),
+            messageLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 76),
             
-//            messageLabel.topAnchor.constraint(equalTo: authorEmailLabel.bottomAnchor, constant: 0)
+            authorNameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            authorEmailLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            messageLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            
+            authorNameLabel.topAnchor.constraint(equalTo: self.topAnchor), //16
+            authorNameLabel.heightAnchor.constraint(equalToConstant: 30),
+            authorEmailLabel.topAnchor.constraint(equalTo: authorNameLabel.bottomAnchor, constant: 2),
+            messageLabel.topAnchor.constraint(equalTo: authorEmailLabel.bottomAnchor, constant: 2),
+            
+            authorNameLabel.bottomAnchor.constraint(equalTo: authorNameLabel.topAnchor, constant: 2),
+            authorEmailLabel.bottomAnchor.constraint(equalTo: messageLabel.topAnchor, constant: 2),
+            messageLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+           
         ])
     }
     
@@ -106,7 +109,7 @@ class CommitCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
         setupSubViews()
-        setupAutoLayout(stackView: stackViewVertical)
+        setupAutoLayout()
         
     }
     
