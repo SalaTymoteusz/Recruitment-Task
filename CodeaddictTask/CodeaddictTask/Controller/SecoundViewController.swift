@@ -88,7 +88,7 @@ class SecoundViewController: UIViewController {
                     commits = data
                     shareView.tableView.reloadData()
                     spinnerStop(spinner: self.shareView.tableViewSpinner)
-                    shareView.tableView.separatorColor = .gray
+                    shareView.tableView.separatorColor = .systemGray6
                 }
             }
         }
