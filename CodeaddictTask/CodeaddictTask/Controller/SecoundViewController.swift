@@ -120,22 +120,29 @@ class SecoundViewController: UIViewController {
         shareView.shareRepoButton.addTarget(self, action: #selector(shareRepo), for: .touchUpInside)
         shareView.viewOnlineButton.addTarget(self, action: #selector(viewOnline), for: .touchUpInside)
     }
+    
     @objc private func viewOnline() {
         print("view online")
-        if let url = URL(string: "https://www.hackingwithswift.com") {
+        
+        guard let link = repository.html_url else {
+            return
+        }
+        
+        if let url = URL(string: link) {
             UIApplication.shared.open(url)
         }
     }
     
     @objc private func shareRepo() {
 
-        
         // text to share
-        let text = "This is some text that I want to share."
+        guard let link = repository.html_url else {
+            return
+        }
 
         // set up activity view controller
-        let textToShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        let linkToShare = [ link ]
+        let activityViewController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
 
         // exclude some activity types from the list (optional)
